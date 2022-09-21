@@ -93,6 +93,19 @@ paymentSelected.children[1].setAttribute("selected", true);
 paypal.style.display = "none";
 bitcoin.style.display = "none";
 
+// check if we can validated the elements using this function 
+const invalidated = (element) => {
+  element.parentNode.className = 'not-valid';
+  element.parentNode.className.remove = 'valid';
+  element.parentNode.lastElementChild.style.display = 'block';
+};
+
+const validated = (element) => {  
+  element.parentNode.className = 'valid';
+  element.parentNode.className.remove = 'not-valid';
+  element.parentNode.lastElementChild.style.display = 'none';
+};
+
 // changes in the selected payment will be found by event listener, and it will match the the method selected 
 
 paymentSelected.addEventListener("change",(e) =>{
@@ -167,8 +180,11 @@ const nameValidation = () => {
     return validCvv;
   };
 
+  const form = document.querySelector('form');
+
 // event listenr for all users sumbtion 
 form.addEventListener("submit", (e) => {
+  e.preventDefault(); 
     if(invalidated) {
       e.preventDefault();
     }
