@@ -31,14 +31,16 @@ const shirtThemes = shirtColor.children;
 
 // Event listener for the design selected
 shirtDesign.addEventListener("change", (e) => {
-    document.getElementById("color").disabled = false;
-    if(e.target.value === shirtTheme[i].getAttribute("data-theme")) {
-        shirtThemes[i].hidden = false;
-        shirtThemes[i].setAttribute("selected", true);
-      } else {
-        shirtThemes[i].hidden = true;
-        shirtThemes[i].removeAttribute("selected");
-      }
+  document.getElementById("color").disabled = false;
+  for (let i = 0; i < shirtThemes.length; i++) {
+    if (e.target.value === shirtThemes[i].getAttribute("data-theme")) {
+      shirtThemes[i].hidden = false;
+      shirtThemes[i].setAttribute("selected", true);
+    } else {
+      shirtThemes[i].hidden = true;
+      shirtThemes[i].removeAttribute("selected");
+    }
+  }
 });
 
 // Making fieldset and <p> elements listent for user changes when detected.Starting at 0
@@ -141,21 +143,21 @@ const activitiesArray = document.querySelectorAll('[type="checkbox"]');
 
 //function so see if input is correct
 const nameValidation = () => {
-    let nameInput = username.value;
+    let nameInput = userName.value;
     let validName = /^[a-zA-Z ]{2,30}$/.test(nameInput);
     return validName;
   };
   
   const emailValidation = () => {
     let emailSubmited = emailField.value;
-    let validEmailed = /^\w+([\.-]?\w+)*@\w+([\.-]\w+)*(\.\w{2,3})+$/.test(
+    let validEmails = /^\w+([\.-]?\w+)*@\w+([\.-]\w+)*(\.\w{2,3})+$/.test(
       emailSubmited
     );
-    return validEmail;
+    return validEmails;
   };
   
   const registerValidation = () => {
-    if (addedCost > 0) {
+    if (newCost > 0) {
       return true;
     } else {
       return false;
@@ -201,23 +203,23 @@ form.addEventListener("submit", (e) => {
         validated(emailField);
       }
     
-      if (!activityField()) {
+      if (!registerValidation()) {
         invalidated(activityField);
       } else {
         validated(activityField);
       }
     
       if (paymentSelected.value === "credit-card") {
-        if (!cardValidator()) {
+        if (!cardValidation()) {
           invalidated(cardField);
         } else {
           validated(cardField);
         }
     
-        if (!zipValidatorion()) {
+        if (!zipValidation()) {
           invalidated(zipField);
         } else {
-          validated(zipField);
+          validated(zipField); 
         }
     
         if (!cvvValidation()) {
@@ -228,3 +230,27 @@ form.addEventListener("submit", (e) => {
       }
     });
     
+
+
+  
+//keyup event listeners, to verify in the process
+form.addEventListener("keyup", (e) => {
+  let nameInput = userName.value;
+  let validName = /^[a-zA-Z ]{2,30}$/.test(nameInput);
+
+  if (isNaN(e.target.value === nameInput)) {
+    return validName;
+  } else if (!isNaN(nameInput) && nameInput !== "") {
+    document.getElementById("name-hint").textContent =
+      "Numeric values are invalid";
+  } else if (nameInput === "") {
+    document.getElementById("name-hint").textContent =
+      "Name field cannot be blank";
+  }
+
+  if (!nameValidation()) {
+    invalidated(userName);
+  } else {
+    validated(userName);
+  }
+});
