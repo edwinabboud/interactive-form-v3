@@ -111,16 +111,16 @@ const validated = (element) => {
 // changes in the selected payment will be found by event listener, and it will match the the method selected 
 
 paymentSelected.addEventListener("change",(e) =>{
-    if (e.target.value === "bitcoin") {
-        document.getElementById("bitcoin").style.display = "block";
+    if (e.target.value == "bitcoin") {
+        bitcoin.style.display = "block";
         creditCard.style.display = "none";
         paypal.style.distplay = "none";
-    }else if (e.target.value === 'paypal'){
-        document.getElementById("paypal").style.display = "block";
+    }else if (e.target.value == 'paypal'){
+        paypal.style.display = "block";
         creditCard.style.display = "none";
         bitcoin.style.display = "none";
     } else{
-        document.getElementById("credit-card").style.display = "block";
+        creditCard.style.display  = "block";
         bitcoin.style.display = "none";
         paypal.style.display = "none";
     }
