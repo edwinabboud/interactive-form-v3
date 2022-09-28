@@ -166,7 +166,7 @@ const nameValidation = () => {
   
   const cardValidation = () => {
     let cardSubmited = cardField.value;
-    let validCard = /^[0-9]{16}$/.test(cardSubmited);
+    let validCard = /^[0-9]{13,16}$/.test(cardSubmited);
     return validCard;
   };
   
