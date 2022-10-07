@@ -104,26 +104,26 @@ const invalidated = (element) => {
 
 const validated = (element) => {  
   element.parentNode.className = 'valid';
-  element.parentNode.className.remove = 'not-valid';
+  element.parentNode.classList.remove('not-valid', 'error-border');
   element.parentNode.lastElementChild.style.display = 'none';
 };
 
 // changes in the selected payment will be found by event listener, and it will match the the method selected 
 
-paymentSelected.addEventListener("change",(e) =>{
-    if (e.target.value == "bitcoin") {
-        bitcoin.style.display = "block";
-        creditCard.style.display = "none";
-        paypal.style.distplay = "none";
-    }else if (e.target.value == 'paypal'){
-        paypal.style.display = "block";
-        creditCard.style.display = "none";
-        bitcoin.style.display = "none";
-    } else{
-        creditCard.style.display  = "block";
-        bitcoin.style.display = "none";
-        paypal.style.display = "none";
-    }
+paymentSelected.addEventListener("change", (e) => {
+  if (e.target.value == "bitcoin") {
+    bitcoin.style.display = "block";
+    creditCard.style.display = "none";
+    paypal.style.display = "none";
+  } else if (e.target.value == "paypal") {
+    paypal.style.display = "block";
+    creditCard.style.display = "none";
+    bitcoin.style.display = "none";
+  } else {
+    creditCard.style.display = "block";
+    bitcoin.style.display = "none";
+    paypal.style.display = "none";
+  }
 });
 
 // new variables for users information
